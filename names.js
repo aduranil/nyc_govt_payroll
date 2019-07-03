@@ -62,14 +62,14 @@ svg
 svg
   .append("text")
   .attr("x", width / 2)
-  .attr("y", innerHeight + margin.bottom)
+  .attr("y", innerHeight + margin.bottom + 15)
   .attr("text-anchor", "middle")
-  .text("salary");
+  .text("SALARY");
 
 const xAxis = d3
   .axisBottom()
   .scale(xScale)
-  .tickFormat(d3.format(".0s"));
+  .tickFormat(d3.format(".2s"));
 const yAxis = d3
   .axisLeft()
   .scale(yScale)
@@ -104,7 +104,7 @@ d3.csv("names.csv", datum => {
   });
   data = data.slice(0, 50);
   yScale.domain(data.map(yValue).reverse()).range([innerHeight, 0]);
-  xScale.domain([30000, d3.max(data, xValue)]).range([0, innerWidth]);
+  xScale.domain([0, 60000]).range([0, innerWidth]);
 
   svg.call(tip);
   const bars = g
