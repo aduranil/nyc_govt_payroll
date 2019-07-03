@@ -8,4 +8,4 @@ To see the graphic locally, clone this repository, cd into the file, and run:
 python -m http.server
 ```
 
-![Government](https://media.giphy.com/media/jVBVoYXmbdcJagDRvH/giphy.gif)
+![Government](https://gfycat.com/niceunfinishedgrub)
