@@ -8,4 +8,4 @@ To see the graphic locally, clone this repository, cd into the file, and run:
 python -m http.server
 ```
 
-![Government](https://gfycat.com/niceunfinishedgrub)
+![Government](https://s3.gifyu.com/images/tablenums3.gif)
