@@ -92,19 +92,20 @@ const colorLegend = d3
   .scale(colorScale)
   .shape("rect");
 let data = [];
-d3.csv("names.csv", datum => {
+d3.csv("names2.csv", datum => {
   datum.forEach(item => {
     item = item["headers"].split("	");
-    item[3] = item[3].split(" ");
+    // item["JOHN 80926.594391 M"]
+    item = item[0].split(" ");
     data.push({
-      first_name: item[1],
-      salary: item[2].slice(0, 5),
-      gender: item[3][1]
+      first_name: item[0],
+      salary: item[1].slice(0, 5),
+      gender: item[2]
     }); // lowercase
   });
   data = data.slice(0, 50);
   yScale.domain(data.map(yValue).reverse()).range([innerHeight, 0]);
-  xScale.domain([0, 60000]).range([0, innerWidth]);
+  xScale.domain([0, 85000]).range([0, innerWidth]);
 
   svg.call(tip);
   const bars = g
