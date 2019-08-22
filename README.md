@@ -8,4 +8,4 @@ To see the graphic locally, clone this repository, cd into the file, and run:
 python -m http.server
 ```
 
-![Government](https://s3.gifyu.com/images/tablenums3.gif)
+![Government](https://firebasestorage.googleapis.com/v0/b/selfies-22b79.appspot.com/o/salarygraph.gif?alt=media&token=3cd98959-da91-48e5-9c4e-d8eadc65f89a)
