@@ -1,0 +1,33 @@
+body {
+  font: 10px sans-serif;
+}
+
+.bar:hover {
+  opacity: 0.1;
+}
+
+.d3-tip {
+  display: block;
+  position: absolute;
+  padding: .5em;
+  content: attr(title);
+  min-width: 120px;
+  text-align: center;
+  width: auto;
+  height: auto;
+  white-space: nowrap;
+  top: -32px;
+  background: rgba(0,0,0,.8);
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  color: #fff;
+  font-size: em;
+  pointer-events: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
