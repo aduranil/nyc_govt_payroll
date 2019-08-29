@@ -27,3 +27,7 @@
   stroke: steelblue;
   stroke-width: 2px;
 }
+
+svg {
+  overflow-y: scroll;
+}
