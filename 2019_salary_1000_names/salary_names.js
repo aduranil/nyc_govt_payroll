@@ -22,15 +22,22 @@ const tip = d3
   .offset([-10, 0])
   .html(function(d) {
     var html =
-      "<h1>" +
+      "<div>" +
+      "<div>" +
       d.first_name +
-      "</h1>" +
-      "<h1>" +
+      "</div>" +
+      "<div>" +
+      "name count: " +
+      parseInt(d.count) +
+      "</div>" +
+      "<div>" +
+      "salary: " +
       "$" +
       d.salary.slice(0, 2) +
       "," +
       d.salary.slice(2, 5) +
-      "</h1>";
+      "</div>" +
+      "</div>";
     return html;
   });
 svg
@@ -40,7 +47,7 @@ svg
   .attr("text-anchor", "middle")
   .style("font-size", "18px")
   .attr("font-weight", "bold")
-  .text("2019 NYC Government Salaries");
+  .text("2019 Base Salary for Salaried Workers");
 
 svg
   .append("text")
@@ -58,7 +65,7 @@ svg
   .attr("y", 0 + (margin.top + 30) / 2)
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
-  .text("for names shared by +1000 employees");
+  .text("for names shared by +500 employees");
 
 svg
   .append("text")
@@ -94,15 +101,13 @@ const colorLegend = d3
   .scale(colorScale)
   .shape("rect");
 let data = [];
-d3.csv("data_700_names.csv", datum => {
+d3.csv("salaried_employees_500.csv", datum => {
   datum.forEach(item => {
-    item = item["headers"].split("	");
-    // item["JOHN 80926.594391 M"]
-    item = item[0].split(" ");
     data.push({
-      first_name: item[0],
-      salary: item[1].slice(0, 5),
-      gender: item[2]
+      first_name: item["first_name"],
+      salary: item["base_salary"].slice(0, 5),
+      gender: item["gender"],
+      count: item["name_count"]
     }); // lowercase
   });
   // data = data.slice(0, 50);
@@ -128,7 +133,7 @@ d3.csv("data_700_names.csv", datum => {
     .attr("width", d => xScale(xValue(d)))
     .attr("height", d => yScale.bandwidth())
     .attr("fill", d => {
-      return d.gender == "F" ? "#a861ff" : "#0dc3ff";
+      return d.gender == "female" ? "#a861ff" : "#0dc3ff";
     });
 
   xAxisG.call(xAxis);
