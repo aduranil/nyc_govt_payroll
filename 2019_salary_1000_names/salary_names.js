@@ -62,7 +62,7 @@ svg
 svg
   .append("text")
   .attr("x", width / 2)
-  .attr("y", 0 + (margin.top + 30) / 2)
+  .attr("y", 0 + (margin.top + 35) / 2)
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
   .text("for names shared by +500 employees");
@@ -110,7 +110,7 @@ d3.csv("salaried_employees_500.csv", datum => {
       count: item["name_count"]
     }); // lowercase
   });
-  // data = data.slice(0, 50);
+
   yScale.domain(data.map(yValue).reverse()).range([innerHeight, 0]);
   xScale.domain([0, 90000]).range([0, innerWidth]);
 
@@ -144,4 +144,5 @@ d3.csv("salaried_employees_500.csv", datum => {
     .selectAll(".cell text")
     .attr("dy", "0.1em");
   yAxisG.selectAll(".tick line").remove();
+  xAxisG.selectAll("text").style("font-size", "15px");
 });
