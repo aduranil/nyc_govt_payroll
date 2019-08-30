@@ -1,5 +1,3 @@
-const xValue = d => d.salary;
-const yValue = d => d.first_name;
 const margin = { left: 100, right: 30, top: 50, bottom: 75 };
 const svg = d3.select("svg");
 const width = svg.attr("width");
@@ -9,13 +7,7 @@ const innerHeight = height - margin.top - margin.bottom;
 const g = svg
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
-const xAxisG = g.append("g").attr("transform", `translate(0, ${innerHeight})`);
-const yAxisG = g.append("g");
-const xScale = d3.scaleLinear();
-const yScale = d3
-  .scaleBand()
-  .paddingInner(0.2)
-  .paddingOuter(0.0);
+
 const tip = d3
   .tip()
   .attr("class", "d3-tip")
@@ -23,20 +15,20 @@ const tip = d3
   .html(function(d) {
     var html =
       "<div>" +
-      "<div>" +
+      "<h3>" +
       d.first_name +
-      "</div>" +
-      "<div>" +
+      "</h3>" +
+      "<h3>" +
       "name count: " +
       parseInt(d.count) +
-      "</div>" +
-      "<div>" +
+      "</h3>" +
+      "<h3>" +
       "salary: " +
       "$" +
       d.salary.slice(0, 2) +
       "," +
       d.salary.slice(2, 5) +
-      "</div>" +
+      "</h3>" +
       "</div>";
     return html;
   });
@@ -53,10 +45,11 @@ svg
   .append("text")
   .attr("transform", "rotate(-90)")
   .attr("y", 5)
-  .attr("x", 0 - height / 2)
+  .attr("x", 0 - 600 / 2)
   .attr("dy", "1em")
   .style("text-anchor", "middle")
   .style("font-size", "16px")
+  .attr("font-weight", "bold")
   .text("NAME");
 
 svg
@@ -67,39 +60,14 @@ svg
   .style("font-size", "16px")
   .text("for names shared by +500 employees");
 
-svg
-  .append("text")
-  .attr("x", width / 2)
-  .attr("y", innerHeight + margin.bottom + 15)
-  .attr("text-anchor", "middle")
-  .style("font-size", "16px")
-  .text("SALARY");
+// svg
+//   .append("text")
+//   .attr("x", width / 2)
+//   .attr("y", innerHeight + margin.bottom + 15)
+//   .attr("text-anchor", "middle")
+//   .style("font-size", "16px")
+//   .text("SALARY");
 
-const xAxis = d3
-  .axisBottom()
-  .scale(xScale)
-  .tickFormat(d3.format(".2s"));
-const yAxis = d3
-  .axisLeft()
-  .scale(yScale)
-  .tickPadding(5)
-  .tickSize(-innerWidth);
-const colorLegendG = g
-  .append("g")
-  .attr("transform", `translate(${innerWidth - 60}, 300)`);
-colorLegendG
-  .append("text")
-  .attr("class", "legend-label")
-  .attr("x", -2)
-  .attr("y", -18);
-const colorScale = d3
-  .scaleOrdinal()
-  .domain(["MALE", "FEMALE"])
-  .range(["#0dc3ff", "#a861ff"]);
-const colorLegend = d3
-  .legendColor()
-  .scale(colorScale)
-  .shape("rect");
 let data = [];
 d3.csv("salaried_employees_500.csv", datum => {
   datum.forEach(item => {
@@ -108,11 +76,73 @@ d3.csv("salaried_employees_500.csv", datum => {
       salary: item["base_salary"].slice(0, 5),
       gender: item["gender"],
       count: item["name_count"]
-    }); // lowercase
+    }); // lowercased
+
+    // data = data.slice(0, 50);
   });
 
-  yScale.domain(data.map(yValue).reverse()).range([innerHeight, 0]);
-  xScale.domain([0, 90000]).range([0, innerWidth]);
+  const xAxisB = d3
+    .select("#xaxis")
+    .append("svg")
+    .attr("width", 1000);
+  const xAxisG = xAxisB
+    .attr("transform", `translate(${margin.left},0)`)
+    // .append("text")
+    // .attr("x", width / 2)
+    // .attr("y", innerHeight + margin.bottom + 15)
+    // .attr("text-anchor", "middle")
+    // .style("font-size", "16px")
+    // .text("SALARY")
+
+    .append("g");
+  // .attr("transform", `translate(${margin.left},0`);
+
+  xAxisB
+    .append("g")
+    .append("text")
+    .attr("x", (innerWidth - 65) / 2)
+    .attr("y", 50)
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .attr("font-weight", "bold")
+    .text("SALARY");
+
+  const yAxisG = g.append("g");
+  const xValue = d => d.salary;
+  const yValue = d => d.first_name;
+  const xScale = d3
+    .scaleLinear()
+    .domain([0, 90000])
+    .range([0, innerWidth]);
+  const yScale = d3
+    .scaleBand()
+    .paddingInner(0.2)
+    // .paddingOuter(0.2)
+    .domain(data.map(yValue).reverse())
+    .range([innerHeight + 75, 0]);
+  const xAxis = d3
+    .axisBottom()
+    .scale(xScale)
+    .tickFormat(d3.format(".2s"));
+  const yAxis = d3
+    .axisLeft()
+    .scale(yScale)
+    .tickPadding(5)
+    .tickSize(-innerWidth);
+  // yScale.domain(data.map(yValue).reverse()).range([innerHeight, 0]);
+  // xScale.domain([0, 90000]).range([0, innerWidth]);
+
+  const colorLegendG = xAxisB;
+  // .append("g")
+  // .attr("transform", `translate(${(innerWidth - 125) / 2}, 70)`);
+  const colorScale = d3
+    .scaleOrdinal()
+    .domain(["MALE", "FEMALE"])
+    .range(["#0dc3ff", "#DCF763"]);
+  const colorLegend = d3
+    .legendColor()
+    .scale(colorScale)
+    .shape("rect");
 
   svg.call(tip);
   const bars = g
@@ -133,7 +163,7 @@ d3.csv("salaried_employees_500.csv", datum => {
     .attr("width", d => xScale(xValue(d)))
     .attr("height", d => yScale.bandwidth())
     .attr("fill", d => {
-      return d.gender == "female" ? "#a861ff" : "#0dc3ff";
+      return d.gender == "female" ? "#DCF763" : "#0dc3ff";
     });
 
   xAxisG.call(xAxis);
@@ -145,4 +175,5 @@ d3.csv("salaried_employees_500.csv", datum => {
     .attr("dy", "0.1em");
   yAxisG.selectAll(".tick line").remove();
   xAxisG.selectAll("text").style("font-size", "15px");
+  // xAxisG.selectAll("line").remove();
 });

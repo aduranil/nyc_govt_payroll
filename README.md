@@ -1,6 +1,6 @@
 # nyc government payroll
 
-July 2018 I was looking at making infographics using info from [nyc open data payroll data](https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e). I downloaded the data, and grouped by fiscal year and first name, as long as the first name had at least 1000 instances of that name. I made sure to only get data for people with annual salaries. I then just took an average of the salaries, and this is the result, which is not really surprising. I'm not a data scientist so accuracy of this is not guaranteed!!
+July 2018 I was looking at making infographics using info from [nyc open data payroll data](https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e). I downloaded the data, and grouped by fiscal year and first name, as long as the first name had at least 500 instances of that name. I made sure to only get data for people with annual salaries. I then just took an average of the salaries. I'm not a data scientist so accuracy of this is not guaranteed!!
 
 To see the graphic locally, clone this repository, cd into the file, and run:
 
