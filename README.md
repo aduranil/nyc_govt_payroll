@@ -10,4 +10,4 @@ python -m http.server
 
 To look at how I got the data, install jupyter notebook and initialize it in this repo with `jupyter notebook`
 
-![Government](https://firebasestorage.googleapis.com/v0/b/selfies-22b79.appspot.com/o/salarygraph.gif?alt=media&token=3cd98959-da91-48e5-9c4e-d8eadc65f89a)
+![Government](https://firebasestorage.googleapis.com/v0/b/selfies-22b79.appspot.com/o/salarygraph2.gif?alt=media&token=d5af29be-3f5d-4b72-af5a-a2b2b110dabf)
